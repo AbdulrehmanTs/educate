@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Navigate } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../firebase-config';
@@ -6,10 +6,14 @@ import { auth } from '../../firebase-config';
 const PrivateRoute = ({ children }) => {
     const [user, setUser]  = useState({})
 
-  onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser)
-    }
-  )
+    useEffect(()=> {
+        onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser)
+          }
+        )
+    }, [])
+
+  
 
     return user ? children : <Navigate to="/login" />;
 };

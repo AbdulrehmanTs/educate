@@ -10,6 +10,14 @@ const firebaseConfig = {
   messagingSenderId: "920683354436",
   appId: "1:920683354436:web:ba04dbdad3d66db9ac5f11",
   measurementId: "G-2Y2TG8X3V6"
+
+  // apiKey: "AIzaSyCSKOLma_cRMDDwYwAjimikOtPfCpi5xJk",
+  // authDomain: "testing-ac9fc.firebaseapp.com",
+  // projectId: "testing-ac9fc",
+  // storageBucket: "testing-ac9fc.appspot.com",
+  // messagingSenderId: "833952318707",
+  // appId: "1:833952318707:web:120217aa9d06a4bc59e386",
+  // measurementId: "G-WK45QVQ52M"
 };
 
 export const app = initializeApp(firebaseConfig);

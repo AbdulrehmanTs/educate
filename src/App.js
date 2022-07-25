@@ -20,7 +20,7 @@ function App() {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/about-you" element={<PrivateRoute><AboutYou /></PrivateRoute>} />
           <Route exact path="/create-class" element={<PrivateRoute><CreateClassroom /></PrivateRoute>} />
-          <Route exact path="//join-class" element={<PrivateRoute><JoinClass /></PrivateRoute>} />
+          <Route exact path="/join-class" element={<PrivateRoute><JoinClass /></PrivateRoute>} />
         </Routes>
       </Router>
       {/* <Login /> */}

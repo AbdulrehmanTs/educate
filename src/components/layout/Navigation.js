@@ -22,11 +22,15 @@ const Navigation = () => {
 
   const [user, setUser]  = useState()
 
-  onAuthStateChanged(auth, (currentUser) => {
+  useEffect(()=> {
+    onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
     }
   )
+  }, [])
+  
 
+  console.log("user", user)
   return (
     <>
         <nav className="w-[100%] h-[80px] bg-[#fbfbfb] shadow-sm">

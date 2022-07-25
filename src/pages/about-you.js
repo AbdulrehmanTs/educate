@@ -1,17 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/layout/Layout";
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import CancelIcon from "@mui/icons-material/Cancel";
 import teacherPng from "../assets/images/teacher.png";
 import studentPng from "../assets/images/student.png";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, getDocs } from "firebase/firestore";
 import { dbase } from "../firebase-config";
+import { onAuthStateChanged } from "firebase/auth"
+import { auth } from "../firebase-config";
+import { useNavigate } from "react-router-dom";
+
+
 
 const AboutYou = () => {
-    
+  const navigate = useNavigate()
   const [yourName, set_yourName] = useState("");
   const [userType, set_userType] = useState("teacher");
+  const [user, setUser] = useState({})
+
+  const [teachers, setTeachers] = useState([])
+  const [students, setStudents] = useState([])
+  const [exists, setExists] = useState({})
+
 
   const teacherStudentcheck = (type) => {
     if (type == "teacher") {
@@ -34,15 +45,16 @@ const AboutYou = () => {
     if (userType !== "" && yourName !== "") {
       if (userType == "teacher") {
         let teacherObj = {
-            id: localStorage.getItem("id"),
+            id: user.uid,
             name: yourName,
-            phone: localStorage.getItem('phone'),
-            email: localStorage.getItem('email'),
+            status: 'teacher',
+            phone: user?.phoneNumber || "",
+            email: user?.email || "",
         }
-        console.log("teacherObj",teacherObj)
+        console.log("teacherObj", teacherObj)
 
         const teacherData = collection(dbase,'teacher');
-        addDoc(teacherData, {teacherObj})
+        addDoc(teacherData, teacherObj)
         .then(response=> {
             console.log("res",response);
             window.location.href = "/create-class";
@@ -54,15 +66,16 @@ const AboutYou = () => {
       }
       if (userType == "student") {
         let studentObj = {
-            id: localStorage.getItem("id"),
+            id: user?.uid,
             name: yourName,
-            phone: localStorage.getItem('phone'),
-            email: localStorage.getItem('email'),
+            status: 'student',
+            phone: user?.phoneNumber || "",
+            email: user?.email || "",
         }
         console.log("studentObj",studentObj)
 
         const studentData = collection(dbase,'student');
-        addDoc(studentData, {studentObj})
+        addDoc(studentData, studentObj)
         .then(response=> {
             console.log("res",response);
             window.location.href = "/join-class";
@@ -75,6 +88,48 @@ const AboutYou = () => {
       }
     }
   };
+
+  const getData = async (ref, set) => {
+      await getDocs(ref).then((snapshot)=> {
+      let users = []
+      snapshot.docs.forEach((doc)=> {
+        users.push({...doc.data() })
+      })
+      set(users)
+    }).catch((err)=> {
+      console.log(err)
+    })
+  }
+
+
+  const teacherRef = collection(dbase, "teacher");
+  const studentRef = collection(dbase, "student");
+
+
+  useEffect(()=> {
+    onAuthStateChanged(auth, (currentUser) => {
+        setUser(currentUser)
+      }
+    )
+    getData(teacherRef, setTeachers)
+    getData(studentRef, setStudents)
+  }, [])
+
+
+  useEffect(()=> {
+    setExists([...teachers, ...students].filter( item =>
+      item.email === user.email || item.phoneNumber === user.phoneNumber
+    ))
+  }, [teachers, students, user])
+
+
+  if(exists.length > 0 ){
+    if (exists[0].status === "student"){
+      navigate("/join-class")
+    }else if (exists[0].status === "teacher"){
+      navigate("/create-class")
+    }
+  }
 
   return (
     <Layout>
