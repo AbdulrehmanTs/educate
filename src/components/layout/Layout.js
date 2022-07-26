@@ -39,7 +39,6 @@ const Layout = ({ children }) => {
     getData(studentRef, setStudents)
   }, [])
 
-  console.log('layout user', user)
 
 
   useEffect(() => {
@@ -51,22 +50,19 @@ const Layout = ({ children }) => {
     }else{
       setExists(true)
     }
-
+    console.log("pathName", window.location.pathname)
+    
     if (user && !exists && window.location.pathname !== '/about-you') {
-      console.log("path", window.location.pathname)
-        set_showStrip(true);
-    }else if(user && exists && window.location.pathname !== '/about-you'){
-      set_showStrip(false)
-    } else{
+      set_showStrip(true);
+    }else {
       set_showStrip(false)
     }
-
-  }, [teachers, students, user])
-
+  }, [teachers, students, user, exists])
+  
   
   console.log("teachers--",teachers)
   console.log("students--",students)
-  console.log("currentUser--",user)
+  console.log("layoutuser--",user)
   console.log("exist--",exists)
   console.log("strip--",strip)
   
