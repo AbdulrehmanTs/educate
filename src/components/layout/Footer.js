@@ -38,7 +38,7 @@ const Footer = () => {
               <a><img src={appStore} className='w-[130px] mr-[10px]' /></a>
               <a><img src={googlePlay} className='w-[130px]' /></a>
             </div>
-            <h4 className='text-[18px] mt-[10px] mb-[10px] font-semibold'>WE ARE SOCILAL</h4>
+            <h4 className='text-[18px] mt-[10px] mb-[10px] font-semibold'>WE ARE SOCIAL</h4>
             <div>
               <span className='text-[#df2d69] mr-[10px]'>
               <InstagramIcon />

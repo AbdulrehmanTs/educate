@@ -1,0 +1,12 @@
+.slide-for-trusted {
+  animation: slide-for-trusted 6s infinite linear;
+}
+
+@keyframes slide-for-trusted {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-103.5%, 0);
+  }
+}

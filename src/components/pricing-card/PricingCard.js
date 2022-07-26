@@ -30,7 +30,7 @@ const PricingCard = ({ data, index }) => {
       <div className="mt-[20px]">
         {
           index == 0 ?
-            <Button variant="contained" fullWidth="true">
+            <Button variant="contained" fullWidth={true}>
               <span className="fim capitalize block p-[3px]">Start your free trial</span>
             </Button>
             : 

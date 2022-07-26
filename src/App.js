@@ -8,6 +8,8 @@ import JoinClass from "./pages/join-class";
 import AboutYou from "./pages/about-you";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PrivateRoute from './components/authentication/PrivateRoute'
+import ClassRoomJoined from "./pages/class-room-joined";
+import ClassRoomCreated from "./pages/class-room-created";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route exact path="/about-you" element={<PrivateRoute><AboutYou /></PrivateRoute>} />
           <Route exact path="/create-class" element={<PrivateRoute><CreateClassroom /></PrivateRoute>} />
           <Route exact path="/join-class" element={<PrivateRoute><JoinClass /></PrivateRoute>} />
+          <Route exact path="/class-room-joined" element={<ClassRoomJoined />} />
+          <Route exact path="/class-room-created" element={<ClassRoomCreated />} />
         </Routes>
       </Router>
       {/* <Login /> */}

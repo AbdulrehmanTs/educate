@@ -18,6 +18,14 @@ const firebaseConfig = {
   // messagingSenderId: "833952318707",
   // appId: "1:833952318707:web:120217aa9d06a4bc59e386",
   // measurementId: "G-WK45QVQ52M"
+
+  // apiKey: "AIzaSyBXrnKMmi9kqxN1f7S09uQ4nznHJLapF_U",
+  // authDomain: "project-n-7007b.firebaseapp.com",
+  // databaseURL: "https://project-n-7007b-default-rtdb.firebaseio.com",
+  // projectId: "project-n-7007b",
+  // storageBucket: "project-n-7007b.appspot.com",
+  // messagingSenderId: "92395886379",
+  // appId: "1:92395886379:web:ff726a9e0afa3b3200976e"
 };
 
 export const app = initializeApp(firebaseConfig);

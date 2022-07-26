@@ -21,7 +21,7 @@ const AboutYou = () => {
 
   const [teachers, setTeachers] = useState([])
   const [students, setStudents] = useState([])
-  const [exists, setExists] = useState({})
+  const [exists, setExists] = useState([])
 
 
   const teacherStudentcheck = (type) => {
@@ -109,6 +109,7 @@ const AboutYou = () => {
   useEffect(()=> {
     onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser)
+        console.log('currentUser',currentUser)
       }
     )
     getData(teacherRef, setTeachers)
@@ -118,9 +119,10 @@ const AboutYou = () => {
 
   useEffect(()=> {
     setExists([...teachers, ...students].filter( item =>
-      item.email === user.email || item.phoneNumber === user.phoneNumber
+      item?.email === user?.email || item?.phone === user?.phoneNumber
     ))
   }, [teachers, students, user])
+  console.log("exist", exists)
 
 
   if(exists.length > 0 ){
