@@ -55,7 +55,9 @@ const Layout = ({ children }) => {
     if (user && !exists && window.location.pathname !== '/about-you') {
       console.log("path", window.location.pathname)
         set_showStrip(true);
-    }else{
+    }else if(user && exists && window.location.pathname !== '/about-you'){
+      set_showStrip(false)
+    } else{
       set_showStrip(false)
     }
 
